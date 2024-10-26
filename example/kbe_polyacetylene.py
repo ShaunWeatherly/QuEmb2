@@ -2,6 +2,7 @@
 # A supercell with 4 carbon & 4 hydrogen atoms is defined as unit cell in
 # pyscf's periodic HF calculation
 
+import numpy
 from pyscf.pbc import gto, scf, df
 from kbe import fragpart, BE
 
@@ -49,7 +50,7 @@ kpoint_energy = kmf.kernel()
 kfrag = fragpart(be_type='be2', mol=cell,
                  kpt=kpt, frozen_core=True)
 # Initialize BE
-mykbe = BE(kmf, fobj,
+mykbe = BE(kmf, kfrag,
            kpts=kpts)
 
 # Perform BE density matching
